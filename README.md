@@ -6,7 +6,7 @@ Play Framework 2 application on OpenShift Express
 This git repository will help you get up and running quickly with a Play Framework 2 application
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
-TODO: add info about supported versions/where to go for 2.0
+TODO: add info about supported versions/where to go for 2.0.x/2.1.x
 TODO: add info about tested versions
 TODO: add info about `play` command deprecation
 
@@ -15,12 +15,12 @@ Running on OpenShift
 
 Create a new Play Framework 2 application
 
-    play new play2demo
+    activator new play2demo
     cd play2demo
 
     git init
 
-Register at http://openshift.redhat.com/, and then create a diy (do-it-yourself) application:
+Register at https://openshift.redhat.com/, and then create a diy (do-it-yourself) application:
 
     rhc app create play2demo -t diy-0.1 --no-git -l yourlogin
 
@@ -28,32 +28,26 @@ You will see something like the following:
 
 
 ```bash
-Creating application 'play2demo'
-=========================
+Application Options
+-------------------
+Domain:     yourdomain
+Cartridges: diy-0.1
+Gear Size:  default
+Scaling:    no
 
-  Namespace: yourdomain
-  Gear Size: default
-  Scaling:   no
-  Cartridge: diy-0.1
+Creating application 'play2demo' ... done
 
-Your application's domain name is being propagated worldwide (this might take a minute)...
-play2demo @ http://play2demo-yourdomain.rhcloud.com/
-=================================
-  Application Info
-  ================
-    Gear Size = small
-    Git URL   = ssh://your_uuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
-    SSH URL   = ssh://your_uuid@play2demo-yourdomain.rhcloud.com
-    UUID      = your_uuid
-    Created   = 6:06 PM
-  Cartridges
-  ==========
-    diy-0.1
+  Disclaimer: This is an experimental cartridge that provides a way to try unsupported languages, frameworks, and middleware on OpenShift.
 
-RESULT:
-Application play2demo was created.
-Disclaimer: This is an experimental cartridge that provides a way to try unsupported languages,
-frameworks, and middleware on Openshift.
+Waiting for your DNS name to be available ... done
+
+Your application 'play2demo' is now available.
+
+  URL:        http://play2demo-yourdomain.rhcloud.com/
+  SSH to:     your_uuid@play2demo-yourdomain.rhcloud.com
+  Git remote: ssh://your_uuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
+
+Run 'rhc show-app play2demo' for more details about your app.
 ```
 
 Copy and paste the git url to add it as a remote repo (replace the uuid part with your own!)
@@ -65,12 +59,13 @@ Copy and paste the git url to add it as a remote repo (replace the uuid part wit
 
 And then add this repository as a remote repo named quickstart:
 
-    git remote add quickstart -m master git://github.com/opensas/play2-openshift-quickstart.git
+    git remote add quickstart -m master git://github.com/EugenyLoy/play2-openshift-quickstart.git
     git pull -s recursive -X theirs quickstart master
+
 
 Then use the stage task to prepare your deployment
 
-    play clean compile stage
+    activator clean stage
 
 And add your changes to git's index, commit and push the repo upstream:
 
@@ -82,9 +77,9 @@ That's it, you can now see your application running at:
 
     http://play2demo-yourdomain.rhcloud.com
 
-The first time you do it, it will take quite a few minutes to complete, because git has to upload play's dependencies, but after that git is smart enough to just upload the differences.
+The first time you do it, it will take quite a few minutes to complete, because git has to upload Play's dependencies, but after that git is smart enough to just upload the differences.
 
-To deploy your changes, you can just repeat the steps from play stage, or use the helper script 'openshift_deploy'.
+To deploy your changes, you can just repeat the steps from `activator clean stage`.
 
 Working with a mysql database
 ----------------------------
