@@ -79,7 +79,7 @@ That's it, you can now see your application running at:
 
 The first time you do it, it will take quite a few minutes to complete, because git has to upload Play's dependencies, but after that git is smart enough to just upload the differences.
 
-To deploy your changes, you can just repeat the steps from `activator clean stage`, or use the helper script 'openshift_deploy'.
+To deploy your changes, you can just repeat the steps from `activator clean stage`, or use the helper script `openshift_deploy`.
 
 Working with a mysql database
 ----------------------------
