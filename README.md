@@ -1,13 +1,13 @@
-Play framework 2 application on OpenShift Express
+Play Framework 2 application on OpenShift Express
 ============================
 
-This git repository will help you get up and running quickly with a Play framework 2 application
+This git repository will help you get up and running quickly with a Play Framework 2 application
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
 Running on OpenShift
 --------------------
 
-Create a new Play framework 2 application
+Create a new Play Framework 2 application
 
     play new play2demo
     cd play2demo
@@ -305,7 +305,7 @@ I couldn't have developed this quickstart without the help of [marekjelen](https
 
 It was also of great help Grant Shipley's [article on building a quickstart for openshift](https://www.redhat.com/openshift/community/blogs/how-to-create-an-openshift-github-quick-start-project).
 
-Play framework native support for openshift was a long awaited and pretty popular feature (you are still on time to vote for it [here](https://www.redhat.com/openshift/community/content/native-support-for-play-framework-application)). So it's a great thing that Red Hat engineers came out with this simple and powerful solution, that basically let's you implement any server able to run on a linux box. Kudos to them!!!
+Play Framework native support for openshift was a long awaited and pretty popular feature (you are still on time to vote for it [here](https://www.redhat.com/openshift/community/content/native-support-for-play-framework-application)). So it's a great thing that Red Hat engineers came out with this simple and powerful solution, that basically let's you implement any server able to run on a linux box. Kudos to them!!!
 
 Licence
 ----------------------------
