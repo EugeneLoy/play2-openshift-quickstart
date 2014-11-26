@@ -50,7 +50,7 @@ Your application 'play2demo' is now available.
 Run 'rhc show-app play2demo' for more details about your app.
 ```
 
-Copy and paste the git url to add it as a remote repo (replace the uuid part with your own!):
+Copy and paste the git url to add it as a remote repo (replace the `uuid` part with your own!):
 
     git remote add origin ssh://your_uuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
     git pull -s recursive -X theirs origin master
