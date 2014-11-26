@@ -6,6 +6,9 @@ Play Framework 2 application on OpenShift Express
 This git repository will help you get up and running quickly with a Play Framework 2 application
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
+TODO: add info about tested versions
+TODO: add info about `play` command deprecation
+
 Running on OpenShift
 --------------------
 
