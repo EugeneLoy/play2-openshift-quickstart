@@ -307,7 +307,7 @@ Play will then run your app in production mode. The server will listen to ${OPEN
 Acknowledgments
 ----------------------------
 
-This quickstart is based on [Play Framework 2.0 quickstart](https://github.com/opensas/play2-openshift-quickstart) by opensas. Check it out to run Play Framework 2.0 applications on OpenShift.
+This quickstart is based on [Play Framework 2.0 quickstart](https://github.com/opensas/play2-openshift-quickstart) by opensas. Check it out to run Play 2.0.x and 2.1.x applications on OpenShift.
 
 Licence
 ----------------------------
