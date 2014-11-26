@@ -6,6 +6,7 @@ Play Framework 2 application on OpenShift Express
 This git repository will help you get up and running quickly with a Play Framework 2 application
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
+TODO: add info about supported versions/where to go for 2.0
 TODO: add info about tested versions
 TODO: add info about `play` command deprecation
 
@@ -306,11 +307,7 @@ Play will then run your app in production mode. The server will listen to ${OPEN
 Acknowledgments
 ----------------------------
 
-I couldn't have developed this quickstart without the help of [marekjelen](https://github.com/marekjelen) who answered [my questions on stackoverflow](http://stackoverflow.com/questions/9446275/best-approach-to-integrate-netty-with-openshift) and who also shared his [JRuby quickstart repo](https://github.com/marekjelen/openshift-jruby#readme). (I know, open source rocks!)
-
-It was also of great help Grant Shipley's [article on building a quickstart for openshift](https://www.redhat.com/openshift/community/blogs/how-to-create-an-openshift-github-quick-start-project).
-
-Play Framework native support for openshift was a long awaited and pretty popular feature (you are still on time to vote for it [here](https://www.redhat.com/openshift/community/content/native-support-for-play-framework-application)). So it's a great thing that Red Hat engineers came out with this simple and powerful solution, that basically let's you implement any server able to run on a linux box. Kudos to them!!!
+This quickstart is based on [Play Framework 2.0 quickstart](https://github.com/opensas/play2-openshift-quickstart) by opensas. Check it out to run Play Framework 2.0 applications on OpenShift.
 
 Licence
 ----------------------------
