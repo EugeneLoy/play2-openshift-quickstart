@@ -13,7 +13,7 @@ TODO: add info about `play` command deprecation
 Running on OpenShift
 --------------------
 
-Create a new Play Framework 2 application
+Create a new Play Framework 2 application:
 
     activator new play2demo
     cd play2demo
@@ -50,7 +50,7 @@ Your application 'play2demo' is now available.
 Run 'rhc show-app play2demo' for more details about your app.
 ```
 
-Copy and paste the git url to add it as a remote repo (replace the uuid part with your own!)
+Copy and paste the git url to add it as a remote repo (replace the uuid part with your own!):
 
     git remote add origin ssh://your_uuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
     git pull -s recursive -X theirs origin master
@@ -63,7 +63,7 @@ And then add this repository as a remote repo named quickstart:
     git pull -s recursive -X theirs quickstart master
 
 
-Then use the stage task to prepare your deployment
+Then use the stage task to prepare your deployment:
 
     activator clean stage
 
