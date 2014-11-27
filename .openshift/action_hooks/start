@@ -13,9 +13,13 @@ fi
 
 LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
 
-chmod +x ${OPENSHIFT_REPO_DIR}target/start
+START_SCRIPT_BAT=`find target/universal/stage/bin -name \*.bat`
 
-APP_COMMAND="${OPENSHIFT_REPO_DIR}target/start $PLAY_PARAMS "\
+START_SCRIPT=${START_SCRIPT_BAT%.bat}
+
+chmod +x $START_SCRIPT
+
+APP_COMMAND="$START_SCRIPT $PLAY_PARAMS "\
 "-Dhttp.port=${OPENSHIFT_DIY_PORT} "\
 "-Dhttp.address=${OPENSHIFT_DIY_IP} "\
 "-Dconfig.resource=openshift.conf"
