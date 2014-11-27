@@ -13,7 +13,7 @@ fi
 
 LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
 
-START_SCRIPT_BAT=`find target/universal/stage/bin -name \*.bat`
+START_SCRIPT_BAT=`find ${OPENSHIFT_REPO_DIR}target/universal/stage/bin -name \*.bat`
 
 START_SCRIPT=${START_SCRIPT_BAT%.bat}
 
