@@ -280,24 +280,17 @@ Then you can connect using ssh like this:
 Having a look under the hood
 ----------------------------
 
-This projects takes advantage of openshift's do-it-yourself cartridge to run play framework 2 application natively.
+This projects takes advantage of OpenShift's do-it-yourself cartridge to run Play Framework 2 application natively.
 
-Everytime you push changes to openshift, the following actions will take place:
+Everytime you push changes to OpenShift, the following actions will take place:
 
-* Openshift will run the **.openshift/action_hooks/stop** script to stop the application, in case it's running.
+* OpenShift will run the `.openshift/action_hooks/stop` script to stop the application, in case it's running.
 
-* Then it wil execute **.openshift/action_hooks/start** to start your application. You can specify additional parameters with openshift.play.params.
+* Then it wil execute `.openshift/action_hooks/start` to start your application. You can specify additional parameters with `openshift.play.params`.
 
-```bash
-    ${OPENSHIFT_REPO_DIR}target/start $PLAY_PARAMS 
-        -Dhttp.port=${OPENSHIFT_INTERNAL_PORT}
-        -Dhttp.address=${OPENSHIFT_INTERNAL_IP}
-        -Dconfig.resource=openshift.conf
-```
+Play will then run your app in production mode. The server will listen to `${OPENSHIFT_INTERNAL_PORT}` at `${OPENSHIFT_INTERNAL_IP}`.
 
-Play will then run your app in production mode. The server will listen to ${OPENSHIFT_INTERNAL_PORT} at ${OPENSHIFT_INTERNAL_IP}.
-
-* **.openshift/action_hooks/stop** just tries to kill the RUNNING_PID process, and then checks that no "java" process is running. If it's there, it tries five times to kill it nicely, and then if tries another five times to kill it with -SIGKILL.
+* `.openshift/action_hooks/stop` just tries to kill the `RUNNING_PID` process, and then checks that no `java` process is running. If it's there, it tries five times to kill it nicely, and then if tries another five times to kill it with `-SIGKILL`.
 
 Acknowledgments
 ----------------------------
