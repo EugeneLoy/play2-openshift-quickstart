@@ -290,7 +290,7 @@ Everytime you push changes to OpenShift, the following actions will take place:
 
 Play will then run your app in production mode. The server will listen to `${OPENSHIFT_INTERNAL_PORT}` at `${OPENSHIFT_INTERNAL_IP}`.
 
-* `.openshift/action_hooks/stop` just tries to kill the `RUNNING_PID` process, and then checks that no `java` process is running. If it's there, it tries five times to kill it nicely, and then if tries another five times to kill it with `-SIGKILL`.
+`.openshift/action_hooks/stop` tries to kill the `RUNNING_PID` process, and then checks that no `java` process is running. If it's there, it tries five times to kill it nicely, and then if tries another five times to kill it with `-SIGKILL`.
 
 Acknowledgments
 ----------------------------
