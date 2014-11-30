@@ -118,7 +118,7 @@ It's also a good idea to create a different user with limited privileges on the 
 Updating your application
 -------------------------
 
-To deploy your changes to openshift just run the stage task, add your changes to the index, commit and push:
+To deploy your changes to OpenShift just run the stage task, add your changes to the index, commit and push:
 
 ```bash
     play clean compile stage
@@ -138,10 +138,10 @@ All right, I know you are lazy, just like me. So I added a little script to help
 You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a "-q" parameter to skip the "clean compile" option.
 
 
-A step by step example: deploying computer-database sample app to openshift
+A step by step example: deploying computer-database sample app to OpenShift
 ---------------------------------------------------------------------------
 
-You can add openshift support to an already existing play application. 
+You can add OpenShift support to an already existing play application. 
 
 Let's take the computer-database sample application.
 
@@ -152,7 +152,7 @@ Let's take the computer-database sample application.
     rhc app create -a computerdb -t diy-0.1 --nogit
 ```
 
-We add the "--nogit" parameter to tell openshift to create the remote repo but don't pull it locally. You'll see something like this:
+We add the "--nogit" parameter to tell OpenShift to create the remote repo but don't pull it locally. You'll see something like this:
 
 ```bash
     Confirming application 'computerdb' is available:  Success!
@@ -167,7 +167,7 @@ Copy and paste the git url to add it as a remote repo (replace the uuid part wit
     git add .
     git commit -m "initial deploy"
 
-That's it, you have just cloned your openshift repo, now we will add the quickstart repo:
+That's it, you have just cloned your OpenShift repo, now we will add the quickstart repo:
 
     git remote add quickstart -m master git://github.com/opensas/play2-openshift-quickstart.git
     git pull -s recursive -X theirs quickstart master
@@ -205,14 +205,14 @@ That's it, you can now see computerdb demo application running at:
 
     http://computerdb-yournamespace.rhcloud.com
 
-But there's one more thing you could do. Right now, your application is using the h2 in memory database that comes bundled with play. Openshift may decide to swap your application out of memory if it detects there's no activity. So you'd better persist the information somewhere. That's easy, just edit your count/openshift.conf file to tell play to use a file database whenever it's running on openshift, like this:
+But there's one more thing you could do. Right now, your application is using the h2 in memory database that comes bundled with play. OpenShift may decide to swap your application out of memory if it detects there's no activity. So you'd better persist the information somewhere. That's easy, just edit your count/openshift.conf file to tell play to use a file database whenever it's running on OpenShift, like this:
 
 ```
 db.default.driver=org.h2.Driver
 db.default.url="jdbc:h2:"${OPENSHIFT_DATA_DIR}db/computerdb
 ```
 
-Now, if you feel brave, you may port it to mysql. Add the mysql cartridge to you openshift application:
+Now, if you feel brave, you may port it to mysql. Add the mysql cartridge to you OpenShift application:
 
 ```
 rhc app cartridge add -a computerdb -c mysql-5.1
@@ -240,7 +240,7 @@ You can manage your new MySQL database by embedding phpmyadmin-3.4.
 
     rhc app cartridge add -a computerdb -c phpmyadmin-3.4
 
-Deploy once again, and you'll have your computerdb application running on openshift with mysql at:
+Deploy once again, and you'll have your computerdb application running on OpenShift with mysql at:
 
     http://computerdb-yournamespace.rhcloud.com
 
@@ -260,7 +260,7 @@ For example, to limit java memory usage to 512 MB you can do:
 Trouble shooting
 ----------------
 
-To find out what's going on in openshift, issue:
+To find out what's going on in OpenShift, issue:
 
     rhc app tail -a play2demo
 
