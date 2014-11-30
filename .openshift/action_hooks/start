@@ -12,33 +12,6 @@ fi
 
 LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
 
-
-# load $PLAY_PARAMS
-
-PLAY_PARAMS=""
-
-PLAY_CONFIG_FILE="${OPENSHIFT_REPO_DIR}conf/openshift.conf"
-
-if [[ -f $PLAY_CONFIG_FILE ]]; then
-
-	function read_conf {
-		local key=$1
-		local default=$2
-		local result=`grep "^$key[ |=]" $PLAY_CONFIG_FILE`
-
-		# key not found
-		if [[ -z "$result" ]]; then
-			echo $default
-		else
-			result=`echo "$result" | grep -oP "=.*" | cut -b 1 --complement`
-			echo $result
-		fi
-	}
-
-	PLAY_PARAMS=$(read_conf "openshift.play.params" $PLAY_PARAMS)
-fi
-
-
 # figure out the start script (and ensure it is runnable)
 
 START_SCRIPT_BAT=`find ${OPENSHIFT_REPO_DIR}target/universal/stage/bin -name \*.bat`
