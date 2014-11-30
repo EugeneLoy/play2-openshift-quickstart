@@ -82,7 +82,7 @@ The first time you do it, it will take quite a few minutes to complete, because 
 To deploy your changes, you can just repeat the steps from `activator clean stage`, or use the helper script `openshift_deploy`.
 
 Working with a mysql database
-----------------------------
+-----------------------------
 
 Just issue:
 
@@ -241,15 +241,13 @@ Deploy once again, and you'll have your computerdb application running on opensh
 Configuration
 -------------
 
-When running on openshift, the configuration defined with conf/application.conf will be overriden by conf/openshift.conf, that way you can customize the way your play app will be executed while running on openshift.
+When running on OpenShift, the configuration defined with `conf/application.conf` will be overriden by `conf/openshift.conf`. This allows you to configure the way your play app will be executed while running on OpenShift.
 
-You can also specify additional parameters to pass to play's executable with the **openshift.play.params** key, like this:
+You might want to pass extra arguments to sart script that runs play application. To do this you can define `$PLAY_PARAMS` environment variable.
 
-    # play framework command configuration
-    # ~~~~~
-    #openshift.play.params="-Xmx512M"
+For example, to limit java memory usage to 512 MB you can do:
 
-Don't forget to enclose each param in quotes.
+    rhc env set PLAY_PARAMS="-mem 512" -a play2demo
 
 
 Trouble shooting
@@ -286,9 +284,13 @@ Everytime you push changes to OpenShift, the following actions will take place:
 
 * OpenShift will run the `.openshift/action_hooks/stop` script to stop the application, in case it's running.
 
-* Then it wil execute `.openshift/action_hooks/start` to start your application. You can specify additional parameters with `openshift.play.params`.
+* Then it will execute `.openshift/action_hooks/start` to start your application.
 
-Play will then run your app in production mode. The server will listen to `${OPENSHIFT_INTERNAL_PORT}` at `${OPENSHIFT_INTERNAL_IP}`.
+Play will then run your app in production mode.
+
+`conf/openshift.conf` configuration will be used, content of `$PLAY_PARAMS` environment variable used to define additional start script arguments.
+
+The server will listen to `$OPENSHIFT_INTERNAL_PORT` at `$OPENSHIFT_INTERNAL_IP`.
 
 `.openshift/action_hooks/stop` tries to kill the `RUNNING_PID` process, and then checks that no `java` process is running. If it's there, it tries five times to kill it nicely, and then if tries another five times to kill it with `-SIGKILL`.
 
