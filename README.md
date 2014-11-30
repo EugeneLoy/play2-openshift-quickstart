@@ -288,7 +288,7 @@ Everytime you push changes to OpenShift, the following actions will take place:
 
 Play will then run your app in production mode.
 
-`conf/openshift.conf` configuration will be used, content of `$PLAY_PARAMS` environment variable used to define additional start script arguments.
+`conf/openshift.conf` configuration will be used instead of `conf/application.conf`, `$PLAY_PARAMS` environment variable will define additional start script arguments.
 
 The server will listen to `$OPENSHIFT_INTERNAL_PORT` at `$OPENSHIFT_INTERNAL_IP`.
 
