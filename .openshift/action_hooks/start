@@ -20,7 +20,6 @@ START_SCRIPT=${START_SCRIPT_BAT%.bat}
 
 chmod +x $START_SCRIPT
 
-
 # start application
 
 APP_COMMAND="$START_SCRIPT $PLAY_PARAMS "\
