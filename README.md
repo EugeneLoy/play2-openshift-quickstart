@@ -243,7 +243,7 @@ Configuration
 
 When running on OpenShift, the configuration defined with `conf/application.conf` will be overriden by `conf/openshift.conf`. This allows you to configure the way your play app will be executed while running on OpenShift.
 
-You might want to pass extra arguments to sart script that runs play application. To do this you can define `$PLAY_PARAMS` environment variable.
+You might want to pass extra arguments to start script that runs play application. To do this you can define `$PLAY_PARAMS` environment variable.
 
 For example, to limit java memory usage to 512 MB you can do:
 
