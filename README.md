@@ -105,7 +105,7 @@ You'll also have to include the mysql driver as a dependency. Add the folowing d
 
     "mysql" % "mysql-connector-java" % "5.1.34" 
 
-You can manage your new MySQL database by embedding phpmyadmin-3.4.
+You can manage your new MySQL database by embedding `phpmyadmin-4`:
 
     rhc cartridge add -a play2demo -c phpmyadmin-4
 
