@@ -1,66 +1,45 @@
 #!/bin/bash
 # The logic to stop your application should be put in this script.
 
-# debug 
-# set -x
-
 LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
 
+PID_FILE="${$OPENSHIFT_REPO_DIR}RUNNING_PID"
+
 function kill_app {
-	COMMAND="$1"
+	COMMAND="$1 $2"
+	PID=$2
 	# try 5 times to kill it
 	for c in `seq 1 5`; do
 		echo "$(date) [INFO]: Trying to kill proccess, attempt number $c" >> $LOG_FILE
 		echo "$(date) [INFO]: $COMMAND" >> $LOG_FILE
 		bash -c "$COMMAND &>> $LOG_FILE 2>&1" &> /dev/null
 		sleep $c
-		#killed it
-		if [[ -z `ps -A | grep ' java$'` ]]; then
-			if [[ -f "RUNNING_PID" ]]; then
-				echo "$(date) [WARNING]: RUNNING_PID still exist after process has been killed (possible application crash?)." >> $LOG_FILE
-				rm RUNNING_PID
+		if [[ -z `ps -p $PID | grep -v PID` ]]; then
+			#killed it - check, maybe there is a cleanup needed to be done
+			if [[ -f "$PID_FILE" ]]; then
+				echo "$(date) [WARNING]: RUNNING_PID still exist after process has been killed (possible application crash/forced kill)" >> $LOG_FILE
+				rm "$PID_FILE"
 			fi
-			popd > /dev/null
 			exit 0
 		fi
 	done
 }
 
-if [[ ! $? -eq 0 ]]; then
-	exit $?
-fi
+#kill play process if it was running
+if [[ -f "$PID_FILE" ]]
+then
+	PID=`cat $PID_FILE`
+	echo "$(date) [INFO]: Stopping play application process: $PID" >> $LOG_FILE
 
-pushd "$OPENSHIFT_REPO_DIR" > /dev/null
+	# try to kill it nicely
+	kill_app "kill -SIGTERM" $PID
 
-#kill play if it was running
-if [[ -f "RUNNING_PID" ]]; then
-
-	pid=`cat RUNNING_PID`
-	echo "$(date) [INFO]: Stopping play application" >> $LOG_FILE
-
-	if [[ -n $pid ]]; then
-		#try to kill it nicely
-		kill_app "kill -SIGTERM $pid"
-		#try to kill it harshly
-		kill_app "kill -SIGKILL $pid"
-	fi
-fi
-
-#it survived, try to kill java
-if [[ -n `ps -A | grep java` ]]; then
-	echo "$(date) [INFO]: Stopping java proccess" >> $LOG_FILE
-	#try to kill it nicely
-	kill_app "pkill -SIGTERM java"
-	#try to kill it harshly
-	kill_app "pkill -SIGKILL java"
-fi
-
-#couldn't kill it
-if [[ -n `ps -A | grep java` ]]; then
-	echo "$(date) [ERROR]: Could not stop play application, error executing 'pkill java'" >> $LOG_FILE
-	popd
+	# try to kill it harshly
+	kill_app "kill -SIGKILL" $PID
+	
+	# failed to kill process
+	echo "$(date) [ERROR]: Could not stop play application" >> $LOG_FILE
 	exit 1
+else
+	echo "$(date) [INFO]: $PID_FILE missing - nothing to stop" >> $LOG_FILE
 fi
-
-popd > /dev/null
-exit 0
