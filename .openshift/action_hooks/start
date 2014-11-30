@@ -3,21 +3,52 @@
 # script. The application will work only if it binds to
 # $OPENSHIFT_INTERNAL_IP:8080 
 
+# check for needed vars (todo: add check for more params?)
 
-# loads $PLAY_PARAMS
-. ${OPENSHIFT_REPO_DIR}.openshift/action_hooks/load_config
-
-if [[ ! $? -eq 0 ]]; then
-	exit $?
+if [[ -z $OPENSHIFT_DIY_LOG_DIR ]]; then
+	echo "$(date) [ERROR]: OPENSHIFT_DIY_LOG_DIR not defined"
+	exit 1
 fi
 
 LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
+
+
+# load $PLAY_PARAMS
+
+PLAY_PARAMS=""
+
+PLAY_CONFIG_FILE="${OPENSHIFT_REPO_DIR}conf/openshift.conf"
+
+if [[ -f $PLAY_CONFIG_FILE ]]; then
+
+	function read_conf {
+		local key=$1
+		local default=$2
+		local result=`grep "^$key[ |=]" $PLAY_CONFIG_FILE`
+
+		# key not found
+		if [[ -z "$result" ]]; then
+			echo $default
+		else
+			result=`echo "$result" | grep -oP "=.*" | cut -b 1 --complement`
+			echo $result
+		fi
+	}
+
+	PLAY_PARAMS=$(read_conf "openshift.play.params" $PLAY_PARAMS)
+fi
+
+
+# figure out the start script (and ensure it is runnable)
 
 START_SCRIPT_BAT=`find ${OPENSHIFT_REPO_DIR}target/universal/stage/bin -name \*.bat`
 
 START_SCRIPT=${START_SCRIPT_BAT%.bat}
 
 chmod +x $START_SCRIPT
+
+
+# start application
 
 APP_COMMAND="$START_SCRIPT $PLAY_PARAMS "\
 "-Dhttp.port=${OPENSHIFT_DIY_PORT} "\
