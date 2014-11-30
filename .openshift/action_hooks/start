@@ -24,5 +24,5 @@ APP_COMMAND="$START_SCRIPT $PLAY_PARAMS "\
 "-Dhttp.address=${OPENSHIFT_DIY_IP} "\
 "-Dconfig.resource=openshift.conf"
 
-echo $APP_COMMAND &>> $LOG_FILE
+echo "$(date) [INFO]: Starting: $APP_COMMAND" &>> $LOG_FILE
 nohup bash -c "${APP_COMMAND} &>> ${LOG_FILE} 2>&1" &> /dev/null &
