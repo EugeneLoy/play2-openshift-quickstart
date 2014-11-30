@@ -12,11 +12,11 @@ if [[ -z "$MESSAGE" ]]; then
 fi
 
 if [[ "$QUICK" == "-q" ]] || [[ "$QUICK" == "-Q" ]]; then
-	echo "[info] running: play stage"
-	play stage
+	echo "[info] running: activator stage"
+	activator stage
 else
-	echo "[info] running: play clean compile stage"
-	play clean compile stage
+	echo "[info] running: activator clean stage"
+	activator clean stage
 fi
 
 echo "[info] running: git add . -A"
