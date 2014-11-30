@@ -30,7 +30,7 @@ Register at https://openshift.redhat.com/, and then create a diy (do-it-yourself
 You will see something like the following:
 
 
-```bash
+```
 Application Options
 -------------------
 Domain:     yourdomain
@@ -96,10 +96,12 @@ Don't forget to write down the credentials.
 
 Then uncomment the following lines from your `conf/openshift.conf`:
 
-    db.default.driver=com.mysql.jdbc.Driver
-    db.default.url="jdbc:mysql://"${OPENSHIFT_DB_HOST}":"${OPENSHIFT_DB_PORT}/${OPENSHIFT_APP_NAME}
-    db.default.user=${OPENSHIFT_DB_USERNAME}
-    db.default.password=${OPENSHIFT_DB_PASSWORD}
+```
+db.default.driver=com.mysql.jdbc.Driver
+db.default.url="jdbc:mysql://"${OPENSHIFT_MYSQL_DB_HOST}":"${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}
+db.default.user=${OPENSHIFT_MYSQL_DB_USERNAME}
+db.default.password=${OPENSHIFT_MYSQL_DB_PASSWORD}
+```
 
 You'll also have to include the mysql driver as a dependency. Add the folowing dependency in your `build.sbt` file:
 
@@ -261,7 +263,7 @@ If you feel like investigating further, you can:
 
     rhc app show -a play2demo
 
-```bash
+```
 play2demo @ http://play2demo-yourdomain.rhcloud.com/
   (uuid: youruuid)
 ---------------------------------------------------
