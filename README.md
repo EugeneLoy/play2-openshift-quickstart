@@ -122,7 +122,7 @@ To deploy your changes to OpenShift just run the stage task, add your changes to
     git commit -m "a nice message"
     git push origin
 
-If you want to do a quick test, you can skip the `clean` and just run `activator stage`
+If you want to do a quick test, you can skip the `clean` and just run `activator stage`.
 
 All right, I know you are lazy, just like me. So I added a little script to help you with that, just run:
 
