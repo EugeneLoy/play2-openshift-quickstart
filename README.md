@@ -90,27 +90,24 @@ Working with a mysql database
 
 Just issue:
 
-    rhc app cartridge add -a play2scala -c mysql-5.1
+    rhc cartridge add -a play2demo -c mysql-5.5
 
 Don't forget to write down the credentials.
 
-Then uncomment the following lines from your conf/openshift.conf, like this:
+Then uncomment the following lines from your `conf/openshift.conf`:
 
-    # openshift mysql database
     db.default.driver=com.mysql.jdbc.Driver
     db.default.url="jdbc:mysql://"${OPENSHIFT_DB_HOST}":"${OPENSHIFT_DB_PORT}/${OPENSHIFT_APP_NAME}
     db.default.user=${OPENSHIFT_DB_USERNAME}
     db.default.password=${OPENSHIFT_DB_PASSWORD}
 
-You'll also have to include the mysql driver as a dependency. Add this line to project/Build.scala file:
+You'll also have to include the mysql driver as a dependency. Add the folowing dependency in your `build.sbt` file:
 
-    val appDependencies = Seq( 
-        "mysql" % "mysql-connector-java" % "5.1.18" 
-    ) 
+    "mysql" % "mysql-connector-java" % "5.1.34" 
 
 You can manage your new MySQL database by embedding phpmyadmin-3.4.
 
-    rhc app cartridge add -a play2scala -c phpmyadmin-3.4
+    rhc cartridge add -a play2demo -c phpmyadmin-4
 
 It's also a good idea to create a different user with limited privileges on the database.
 
@@ -120,22 +117,18 @@ Updating your application
 
 To deploy your changes to OpenShift just run the stage task, add your changes to the index, commit and push:
 
-```bash
-    play clean compile stage
+    activator clean stage
     git add . -A
     git commit -m "a nice message"
     git push origin
-```
 
-If you want to do a quick test, you can skip the "clean compile" stuff and just run "play stage"
+If you want to do a quick test, you can skip the `clean` and just run `activator stage`
 
-All right, I know you are lazy, just like me. So I added a little script to help you with that, just run
+All right, I know you are lazy, just like me. So I added a little script to help you with that, just run:
 
-```bash
     openshift_deploy "a nice message"
-```
 
-You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a "-q" parameter to skip the "clean compile" option.
+You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a `-q` parameter to skip the "clean" option.
 
 
 A step by step example: deploying computer-database sample app to OpenShift
