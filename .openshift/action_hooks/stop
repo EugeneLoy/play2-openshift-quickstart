@@ -10,13 +10,14 @@ function kill_app {
 	COMMAND="$1"
 	# try 5 times to kill it
 	for c in `seq 1 5`; do
-		echo "Trying to kill proccess, attempt number $c" >> $LOG_FILE
-		echo "$COMMAND" >> $LOG_FILE
+		echo "$(date) [INFO]: Trying to kill proccess, attempt number $c" >> $LOG_FILE
+		echo "$(date) [INFO]: $COMMAND" >> $LOG_FILE
 		bash -c "$COMMAND &>> $LOG_FILE 2>&1" &> /dev/null
 		sleep $c
 		#killed it
 		if [[ -z `ps -A | grep ' java$'` ]]; then
 			if [[ -f "RUNNING_PID" ]]; then
+				echo "$(date) [WARNING]: RUNNING_PID still exist after process has been killed (possible application crash?)." >> $LOG_FILE
 				rm RUNNING_PID
 			fi
 			popd > /dev/null
@@ -35,7 +36,7 @@ pushd "$OPENSHIFT_REPO_DIR" > /dev/null
 if [[ -f "RUNNING_PID" ]]; then
 
 	pid=`cat RUNNING_PID`
-	echo "Stopping play application" >> $LOG_FILE
+	echo "$(date) [INFO]: Stopping play application" >> $LOG_FILE
 
 	if [[ -n $pid ]]; then
 		#try to kill it nicely
@@ -47,7 +48,7 @@ fi
 
 #it survived, try to kill java
 if [[ -n `ps -A | grep java` ]]; then
-	echo "Stopping java proccess" >> $LOG_FILE
+	echo "$(date) [INFO]: Stopping java proccess" >> $LOG_FILE
 	#try to kill it nicely
 	kill_app "pkill -SIGTERM java"
 	#try to kill it harshly
@@ -56,7 +57,7 @@ fi
 
 #couldn't kill it
 if [[ -n `ps -A | grep java` ]]; then
-	echo "Error: could not stop play application, error executing 'pkill java'" >> $LOG_FILE
+	echo "$(date) [ERROR]: Could not stop play application, error executing 'pkill java'" >> $LOG_FILE
 	popd
 	exit 1
 fi
