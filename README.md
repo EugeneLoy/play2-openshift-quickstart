@@ -1,5 +1,5 @@
 Play Framework 2 application on OpenShift Express
-============================
+=================================================
 
 **WARNING: this quickstrt is in the middle of updating and not yet ready to be used. The plan is to complete it in at the beginning of December 2014.**
 
@@ -7,8 +7,11 @@ This git repository will help you get up and running quickly with a Play Framewo
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
 TODO: add info about supported versions/where to go for 2.0.x/2.1.x
+
 TODO: add info about tested versions
+
 TODO: add info about `play` command deprecation
+
 
 Running on OpenShift
 --------------------
@@ -81,6 +84,7 @@ The first time you do it, it will take quite a few minutes to complete, because 
 
 To deploy your changes, you can just repeat the steps from `activator clean stage`, or use the helper script `openshift_deploy`.
 
+
 Working with a mysql database
 -----------------------------
 
@@ -110,6 +114,7 @@ You can manage your new MySQL database by embedding phpmyadmin-3.4.
 
 It's also a good idea to create a different user with limited privileges on the database.
 
+
 Updating your application
 -------------------------
 
@@ -132,8 +137,9 @@ All right, I know you are lazy, just like me. So I added a little script to help
 
 You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a "-q" parameter to skip the "clean compile" option.
 
+
 A step by step example: deploying computer-database sample app to openshift
--------------------------
+---------------------------------------------------------------------------
 
 You can add openshift support to an already existing play application. 
 
@@ -238,6 +244,7 @@ Deploy once again, and you'll have your computerdb application running on opensh
 
     http://computerdb-yournamespace.rhcloud.com
 
+
 Configuration
 -------------
 
@@ -251,28 +258,35 @@ For example, to limit java memory usage to 512 MB you can do:
 
 
 Trouble shooting
-----------------------------
+----------------
 
-To find out what's going on in openshift, issue
+To find out what's going on in openshift, issue:
 
     rhc app tail -a play2demo
 
-If you feel like investigating further, you can
+If you feel like investigating further, you can:
 
     rhc app show -a play2demo
 
-    Application Info
-    ================
-    play
-        Framework: diy-0.1
-        Creation: 2012-03-18T12:39:18-04:00
-        UUID: youruuid
-        Git URL: ssh://youruuid@play-yournamespace.rhcloud.com/~/git/raw.git/
-        Public URL: http://play-yournamespace.rhcloud.com
+```bash
+play2demo @ http://play2demo-yourdomain.rhcloud.com/
+  (uuid: youruuid)
+---------------------------------------------------
+  Domain:     yourdomain
+  Created:    Nov 26 10:31 PM
+  Gears:      1 (defaults to small)
+  Git URL:    ssh://youruuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
+  SSH:        youruuid@play2demo-yourdomain.rhcloud.com
+  Deployment: auto (on git push)
+
+  diy-0.1 (Do-It-Yourself 0.1)
+  ----------------------------
+    Gears: 1 small
+```
 
 Then you can connect using ssh like this:
 
-    ssh youruuid@play-yournamespace.rhcloud.com
+    ssh youruuid@play-yourdomain.rhcloud.com
 
 
 Having a look under the hood
@@ -294,11 +308,14 @@ The server will listen to `$OPENSHIFT_INTERNAL_PORT` at `$OPENSHIFT_INTERNAL_IP`
 
 `.openshift/action_hooks/stop` tries to kill the `RUNNING_PID` process, and then checks that no `java` process is running. If it's there, it tries five times to kill it nicely, and then if tries another five times to kill it with `-SIGKILL`.
 
+
 Acknowledgments
-----------------------------
+---------------
 
 This quickstart is based on [Play Framework 2.0 quickstart](https://github.com/opensas/play2-openshift-quickstart) by opensas. Check it out to run Play 2.0.x and 2.1.x applications on OpenShift.
 
+
 Licence
-----------------------------
+-------
+
 This project is distributed under [Apache 2 licence](http://www.apache.org/licenses/LICENSE-2.0.html). 
