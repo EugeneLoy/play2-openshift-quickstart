@@ -197,74 +197,17 @@ To see if the push was successful, open another console and check the logs with 
 
     rhc tail intro
 
-Oops, looks like there's a problem.
+Everything should be ok. You can now see `intro` application running at:
 
-```
-[warn] play - Run with -DapplyEvolutions.default=true if you want to run them automatically (be careful)
-Oops, cannot start the server.
-PlayException: Database 'default' needs evolution! [An SQL script need to be run on your database.]
-```
-
-On development mode, play will ask you to run pending evolutions to database, but when in prod mode, you have to specify it form the command line. Let's configure play to automatically apply evolutions. Edit the file conf/openshift.conf like this:
-
-```
-# openshift action_hooks scripts configuration
-# ~~~~~
-openshift.play.params="-DapplyEvolutions.default=true"
-```
-
-Now deploy your app once again with './openshift_deploy -q'
-
-That's it, you can now see computerdb demo application running at:
-
-    http://computerdb-yournamespace.rhcloud.com
-
-But there's one more thing you could do. Right now, your application is using the h2 in memory database that comes bundled with play. OpenShift may decide to swap your application out of memory if it detects there's no activity. So you'd better persist the information somewhere. That's easy, just edit your count/openshift.conf file to tell play to use a file database whenever it's running on OpenShift, like this:
-
-```
-db.default.driver=org.h2.Driver
-db.default.url="jdbc:h2:"${OPENSHIFT_DATA_DIR}db/computerdb
-```
-
-Now, if you feel brave, you may port it to mysql. Add the mysql cartridge to you OpenShift application:
-
-```
-rhc app cartridge add -a computerdb -c mysql-5.1
-```
-
-There are a couple of differences you'll have to handle. Have a look at this quickstart to see what needs to be changed: https://github.com/opensas/openshift-play2-computerdb
-
-I'll give you a few tips: the sample app uses H2 sequences instead of mysql auto_increment fields; you'll also have to modify the computer.insert method not to pass the id field; in order for the referential integrity to work you'll have to create the tables using the innodb engine; and you'll have to replace 'SET REFERENTIAL_INTEGRITY FALSE | TRUE' command with 'SET FOREIGN_KEY_CHECKS = 0 | 1;'.
-
-Then edit you conf/openshift.conf file like this
-
-    # openshift mysql database
-    db.default.driver=com.mysql.jdbc.Driver
-    db.default.url="jdbc:mysql://"${OPENSHIFT_DB_HOST}":"${OPENSHIFT_DB_PORT}/${OPENSHIFT_APP_NAME}
-    db.default.user=${OPENSHIFT_DB_USERNAME}
-    db.default.password=${OPENSHIFT_DB_PASSWORD}
-
-You'll also have to include the mysql driver as a dependency. Add this line to project/Build.scala file:
-
-    val appDependencies = Seq( 
-        "mysql" % "mysql-connector-java" % "5.1.18" 
-    ) 
-
-You can manage your new MySQL database by embedding phpmyadmin-3.4.
-
-    rhc app cartridge add -a computerdb -c phpmyadmin-3.4
-
-Deploy once again, and you'll have your computerdb application running on OpenShift with mysql at:
-
-    http://computerdb-yournamespace.rhcloud.com
+    http://intro-yourdomain.rhcloud.com
 
 
 Configuration
 -------------
 
-When running on OpenShift, the configuration defined with `conf/application.conf` will be overriden by `conf/openshift.conf`. This allows you to configure the way your play app will be executed while running on OpenShift.
+When running on OpenShift, the configuration defined with `conf/application.conf` will be overriden by `conf/openshift.conf`. This allows you to configure the way your Play app will be executed while running on OpenShift.
 
-You might want to pass extra arguments to start script that runs play application. To do this you can define `$PLAY_PARAMS` environment variable.
+You might want to pass extra arguments to start script that runs Play application. To do this you can define `$PLAY_PARAMS` environment variable.
 
 For example, to limit java memory usage to 512 MB you can do:
 
@@ -326,7 +269,7 @@ The server will listen to `$OPENSHIFT_INTERNAL_PORT` at `$OPENSHIFT_INTERNAL_IP`
 Acknowledgments
 ---------------
 
-This quickstart is based on [Play Framework 2.0 quickstart](https://github.com/opensas/play2-openshift-quickstart) by opensas. Check it out to run Play 2.0.x and 2.1.x applications on OpenShift.
+This quickstart is based on [Play Framework 2.0 quickstart](https://github.com/opensas/play2-openshift-quickstart) by opensas. Check it out to run applications based on older (pre-2.2.x) Play Framework versions on OpenShift.
 
 
 Licence
