@@ -22,13 +22,14 @@ Create a new Play Framework 2 application:
     cd play2demo
 
     git init
+    git add .
+    git commit -m "project import"
 
 Register at https://openshift.redhat.com/, and then create a diy (do-it-yourself) application:
 
     rhc app create play2demo -t diy-0.1 --no-git -l yourlogin
 
 You will see something like the following:
-
 
 ```
 Application Options
@@ -53,18 +54,15 @@ Your application 'play2demo' is now available.
 Run 'rhc show-app play2demo' for more details about your app.
 ```
 
-Copy and paste the git url to add it as a remote repo (replace the `uuid` part with your own!):
+Copy and paste the "Git remote" url to add it as a remote repo (replace the `uuid` part with your own!):
 
     git remote add origin ssh://your_uuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
     git pull -s recursive -X theirs origin master
-    git add .
-    git commit -m "initial deploy"
 
 And then add this repository as a remote repo named quickstart:
 
     git remote add quickstart -m master git://github.com/EugenyLoy/play2-openshift-quickstart.git
     git pull -s recursive -X theirs quickstart master
-
 
 Then use the stage task to prepare your deployment:
 
@@ -133,50 +131,71 @@ All right, I know you are lazy, just like me. So I added a little script to help
 You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a `-q` parameter to skip the `clean` option.
 
 
-A step by step example: deploying computer-database sample app to OpenShift
----------------------------------------------------------------------------
+A step by step example: deploying "play-scala-intro" sample app to OpenShift
+----------------------------------------------------------------------------
 
-You can add OpenShift support to an already existing play application. 
+You can add OpenShift support to an already existing Play application.
 
-Let's take the computer-database sample application.
+Let's create `intro` sample application based on `play-scala-intro` template:
 
-```bash
-    cd PLAY_INSTALL_FOLDER/samples/scala/computer-database
+    activator new intro play-scala-intro
+    cd intro
+
+Then, create git repo and add project:
 
     git init
-    rhc app create -a computerdb -t diy-0.1 --nogit
-```
-
-We add the "--nogit" parameter to tell OpenShift to create the remote repo but don't pull it locally. You'll see something like this:
-
-```bash
-    Confirming application 'computerdb' is available:  Success!
-
-    computerdb published:  http://computerdb-yournamespace.rhcloud.com/
-    git url:  ssh://uuid@computerdb-yournamespace.rhcloud.com/~/git/computerdb.git/
-```
-Copy and paste the git url to add it as a remote repo (replace the uuid part with your own!)
-
-    git remote add origin ssh://uuid@computerdb-yourdomain.rhcloud.com/~/git/computerdb.git/
-    git pull -s recursive -X theirs origin master
     git add .
-    git commit -m "initial deploy"
+    git commit -m "project import"
+    
+Now, lets create application on OpenShift:
 
-That's it, you have just cloned your OpenShift repo, now we will add the quickstart repo:
+    rhc app create -a intro -t diy-0.1 --no-git
 
-    git remote add quickstart -m master git://github.com/opensas/play2-openshift-quickstart.git
+We add the `--nogit` parameter to tell OpenShift to create the remote repo but don't pull it locally. You'll see something like this:
+
+```
+Application Options
+-------------------
+Domain:     yourdomain
+Cartridges: diy-0.1
+Gear Size:  default
+Scaling:    no
+
+Creating application 'intro' ... done
+
+  Disclaimer: This is an experimental cartridge that provides a way to try unsupported languages, frameworks, and middleware on OpenShift.
+
+Waiting for your DNS name to be available ... done
+
+Your application 'intro' is now available.
+
+  URL:        http://intro-yourdomain.rhcloud.com/
+  SSH to:     youruuid@intro-yourdomain.rhcloud.com
+  Git remote: ssh://youruuid@intro-yourdomain.rhcloud.com/~/git/intro.git/
+
+Run 'rhc show-app intro' for more details about your app.
+```
+
+Copy and paste the "Git remote" url to add it as a remote repo (replace the uuid part with your own!):
+
+    git remote add origin ssh://youruuid@intro-yourdomain.rhcloud.com/~/git/intro.git/
+    git pull -s recursive -X theirs origin master
+
+That's it, you've just cloned your OpenShift repo, now we will add the quickstart repo:
+
+    git remote add quickstart -m master git://github.com/EugenyLoy/play2-openshift-quickstart.git
     git pull -s recursive -X theirs quickstart master
 
-Then run the stage task, add your changes to git's index, commit and push the repo upstream (you can also just run the *openshift_deploy* script):
+Then run the `stage` task, add your changes to git's index, commit and push the repo upstream (you can also just run the `openshift_deploy` script):
 
-    play clean compile stage
+    activator clean stage
     git add .
-    git commit -m "deploying computerdb application"
+    git commit -m "deploying intro application"
     git push origin
 
 To see if the push was successful, open another console and check the logs with the following command:
 
-    rhc app tail -a computerdb
+    rhc tail intro
 
 Oops, looks like there's a problem.
 
@@ -257,7 +276,7 @@ Trouble shooting
 
 To find out what's going on in OpenShift, issue:
 
-    rhc app tail -a play2demo
+    rhc tail play2demo
 
 If you feel like investigating further, you can:
 
