@@ -12,6 +12,16 @@ TODO: add info about tested versions
 
 TODO: add info about `play` command deprecation
 
+- [Running on OpenShift](#running-on-openshift)
+- [Working with a mysql database](#working-with-a-mysql-database)
+- [Updating your application](#updating-your-application)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [A step by step example: deploying "play-scala-intro" sample app to OpenShift](#a-step-by-step-example-deploying-play-scala-intro-sample-app-to-openshift)
+- [Having a look under the hood](#having-a-look-under-the-hood)
+- [Acknowledgments](#acknowledgments)
+- [Licence](#licence)
+
 
 Running on OpenShift
 --------------------
@@ -143,8 +153,8 @@ For example, to limit java memory usage to 512 MB you can do:
     rhc env set PLAY_PARAMS="-mem 512" -a play2demo
 
 
-Trouble shooting
-----------------
+Troubleshooting
+---------------
 
 To find out what's going on in OpenShift, issue:
 
