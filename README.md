@@ -130,7 +130,7 @@ All right, I know you are lazy, just like me. So I added a little script to help
 
     openshift_deploy "a nice message"
 
-You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a `-q` parameter to skip the "clean" option.
+You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a `-q` parameter to skip the `clean` option.
 
 
 A step by step example: deploying computer-database sample app to OpenShift
