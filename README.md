@@ -131,6 +131,50 @@ All right, I know you are lazy, just like me. So I added a little script to help
 You may leave the message empty and it will add something like "deployed on Thu Mar 29 04:07:30 ART 2012", you can also pass a `-q` parameter to skip the `clean` option.
 
 
+Configuration
+-------------
+
+When running on OpenShift, the configuration defined with `conf/application.conf` will be overriden by `conf/openshift.conf`. This allows you to configure the way your Play app will be executed while running on OpenShift.
+
+You might want to pass extra arguments to start script that runs Play application. To do this you can define `$PLAY_PARAMS` environment variable.
+
+For example, to limit java memory usage to 512 MB you can do:
+
+    rhc env set PLAY_PARAMS="-mem 512" -a play2demo
+
+
+Trouble shooting
+----------------
+
+To find out what's going on in OpenShift, issue:
+
+    rhc tail play2demo
+
+If you feel like investigating further, you can:
+
+    rhc app show -a play2demo
+
+```
+play2demo @ http://play2demo-yourdomain.rhcloud.com/
+  (uuid: youruuid)
+---------------------------------------------------
+  Domain:     yourdomain
+  Created:    Nov 26 10:31 PM
+  Gears:      1 (defaults to small)
+  Git URL:    ssh://youruuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
+  SSH:        youruuid@play2demo-yourdomain.rhcloud.com
+  Deployment: auto (on git push)
+
+  diy-0.1 (Do-It-Yourself 0.1)
+  ----------------------------
+    Gears: 1 small
+```
+
+Then you can connect using ssh like this:
+
+    ssh youruuid@play-yourdomain.rhcloud.com
+
+
 A step by step example: deploying "play-scala-intro" sample app to OpenShift
 ----------------------------------------------------------------------------
 
@@ -200,50 +244,6 @@ To see if the push was successful, open another console and check the logs with 
 Everything should be ok. You can now see `intro` application running at:
 
     http://intro-yourdomain.rhcloud.com
-
-
-Configuration
--------------
-
-When running on OpenShift, the configuration defined with `conf/application.conf` will be overriden by `conf/openshift.conf`. This allows you to configure the way your Play app will be executed while running on OpenShift.
-
-You might want to pass extra arguments to start script that runs Play application. To do this you can define `$PLAY_PARAMS` environment variable.
-
-For example, to limit java memory usage to 512 MB you can do:
-
-    rhc env set PLAY_PARAMS="-mem 512" -a play2demo
-
-
-Trouble shooting
-----------------
-
-To find out what's going on in OpenShift, issue:
-
-    rhc tail play2demo
-
-If you feel like investigating further, you can:
-
-    rhc app show -a play2demo
-
-```
-play2demo @ http://play2demo-yourdomain.rhcloud.com/
-  (uuid: youruuid)
----------------------------------------------------
-  Domain:     yourdomain
-  Created:    Nov 26 10:31 PM
-  Gears:      1 (defaults to small)
-  Git URL:    ssh://youruuid@play2demo-yourdomain.rhcloud.com/~/git/play2demo.git/
-  SSH:        youruuid@play2demo-yourdomain.rhcloud.com
-  Deployment: auto (on git push)
-
-  diy-0.1 (Do-It-Yourself 0.1)
-  ----------------------------
-    Gears: 1 small
-```
-
-Then you can connect using ssh like this:
-
-    ssh youruuid@play-yourdomain.rhcloud.com
 
 
 Having a look under the hood
