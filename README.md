@@ -6,11 +6,9 @@ Play Framework 2 application on OpenShift Express
 This git repository will help you get up and running quickly with a Play Framework 2 application
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
-TODO: add info about supported versions/where to go for 2.0.x/2.1.x
+**Note:** This quickstart is relevant for applications based on Play Framework 2.2.x and above (tested on 2.2.x, 2.3.x). Check out [this quickstart](https://github.com/opensas/play2-openshift-quickstart) for older Play versions.
 
-TODO: add info about tested versions
-
-TODO: add info about `play` command deprecation
+**Note**: TODO add info about `play` command deprecation
 
 - [Running on OpenShift](#running-on-openshift)
 - [Working with a mysql database](#working-with-a-mysql-database)
