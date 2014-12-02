@@ -13,7 +13,7 @@ on OpenShift Express taking advantage of the do-it-yourself cartridge.
 * use `play` command instead of `activator`
 * you won't be able to use `openshift_deploy` convenience script provided in this quickstart
 * when following in "step by step example": use `play`'s `computer-database` [sample](https://www.playframework.com/documentation/2.2.x/Samples) instead of `play-scala-intro` `activator`'s template.
-* when deploying `computer-database` sample: add `-DapplyEvolutions.default=true` to `$PLAY_PARAMS` Read [Configuration](#configuration) for details.
+* when deploying `computer-database` sample: add `-DapplyEvolutions.default=true` to `$PLAY_PARAMS` (see: [configuration](#configuration) and [evolutions](https://www.playframework.com/documentation/2.2.x/Evolutions) for details).
 
 - [Running on OpenShift](#running-on-openshift)
 - [Working with a mysql database](#working-with-a-mysql-database)
