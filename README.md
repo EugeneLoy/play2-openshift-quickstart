@@ -15,6 +15,10 @@ on OpenShift Express taking advantage of the do-it-yourself cartridge.
 * when following in "step by step example": use `play`'s `computer-database` [sample](https://www.playframework.com/documentation/2.2.x/Samples) instead of `play-scala-intro` `activator`'s template.
 * when deploying `computer-database` sample: add `-DapplyEvolutions.default=true` to `$PLAY_PARAMS` (see: [configuration](#configuration) and [evolutions](https://www.playframework.com/documentation/2.2.x/Evolutions) for details).
 
+
+Contents
+========
+
 - [Running on OpenShift](#running-on-openshift)
 - [Working with a mysql database](#working-with-a-mysql-database)
 - [Updating your application](#updating-your-application)
