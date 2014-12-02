@@ -25,6 +25,7 @@ Contents
 - [Troubleshooting](#troubleshooting)
 - [A step by step example: deploying "play-scala-intro" sample app to OpenShift](#a-step-by-step-example-deploying-play-scala-intro-sample-app-to-openshift)
 - [Having a look under the hood](#having-a-look-under-the-hood)
+- [Contributing](#contributing)
 - [Acknowledgments](#acknowledgments)
 - [Licence](#licence)
 
@@ -288,6 +289,12 @@ Play will then run your app in production mode.
 The server will listen to `$OPENSHIFT_INTERNAL_PORT` at `$OPENSHIFT_INTERNAL_IP`.
 
 `.openshift/action_hooks/stop` tries to kill the `RUNNING_PID` process, and then checks that the process is dead. If it's still alive, it tries forur more times to kill it nicely. If process still exists it tries another five times to kill it with `-SIGKILL`.
+
+
+Contributing
+------------
+
+If you have some ideas on how to improve this quickstart (miss some info, found a typo, have some issues following the instructions) - fell free to send a pull request or open an issue. Any help is welcome!
 
 
 Acknowledgments
