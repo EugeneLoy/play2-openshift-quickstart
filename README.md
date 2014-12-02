@@ -17,6 +17,7 @@ on OpenShift Express taking advantage of the do-it-yourself cartridge.
 Contents
 --------
 
+- [Prerequisites](#prerequisites)
 - [Running on OpenShift](#running-on-openshift)
 - [Working with a mysql database](#working-with-a-mysql-database)
 - [Updating your application](#updating-your-application)
@@ -26,6 +27,14 @@ Contents
 - [Having a look under the hood](#having-a-look-under-the-hood)
 - [Acknowledgments](#acknowledgments)
 - [Licence](#licence)
+
+
+Prerequisites
+-------------
+
+* [OpenShift account](https://openshift.redhat.com/app/login)
+* [rhc (OpenShift Client tools)](https://developers.openshift.com/en/getting-started-client-tools.html)
+* [Play](https://www.playframework.com/download)
 
 
 Running on OpenShift
@@ -40,7 +49,7 @@ Create a new Play Framework 2 application:
     git add .
     git commit -m "project import"
 
-Register at https://openshift.redhat.com/, and then create a diy (do-it-yourself) application:
+Create a diy (do-it-yourself) application:
 
     rhc app create play2demo -t diy-0.1 --no-git -l yourlogin
 
