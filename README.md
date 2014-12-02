@@ -17,7 +17,7 @@ on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
 
 Contents
-========
+--------
 
 - [Running on OpenShift](#running-on-openshift)
 - [Working with a mysql database](#working-with-a-mysql-database)
