@@ -8,7 +8,12 @@ on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
 **Note:** This quickstart is relevant for applications based on Play Framework 2.2.x and above (tested on 2.2.x, 2.3.x). Check out [this quickstart](https://github.com/opensas/play2-openshift-quickstart) for older Play versions.
 
-**Note**: TODO add info about `play` command deprecation
+**Note**: Since 2.3.x `play` command line utility has been replaced with `activator`. This quickstart assumes `activator` is used, however you still can follow it for 2.2.x with few minor exceptions. Here is the list of things you should be aware of when using this quickstart with 2.2.x:
+
+* use `play` command instead of `activator`
+* you won't be able to use `openshift_deploy` convenience script provided in this quickstart
+* when following in "step by step example": use `play`'s `computer-database` [sample](https://www.playframework.com/documentation/2.2.x/Samples) instead of `play-scala-intro` `activator`'s template.
+* when deploying `computer-database` sample: add `-DapplyEvolutions.default=true` to `$PLAY_PARAMS` Read [Configuration](#configuration) for details.
 
 - [Running on OpenShift](#running-on-openshift)
 - [Working with a mysql database](#working-with-a-mysql-database)
