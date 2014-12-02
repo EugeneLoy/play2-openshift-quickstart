@@ -1,8 +1,6 @@
 Play Framework 2 application on OpenShift Express
 =================================================
 
-**WARNING: this quickstrt is in the middle of updating and not yet ready to be used. The plan is to complete it in at the beginning of December 2014.**
-
 This git repository will help you get up and running quickly with a Play Framework 2 application
 on OpenShift Express taking advantage of the do-it-yourself cartridge.
 
