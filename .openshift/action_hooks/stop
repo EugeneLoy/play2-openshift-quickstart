@@ -3,7 +3,18 @@
 
 LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
 
-PID_FILE="${OPENSHIFT_REPO_DIR}target/universal/stage/RUNNING_PID"
+# figure out RUNNING_PID location
+
+if [[ -f "${OPENSHIFT_REPO_DIR}target/start" ]]
+then
+	# for 2.0.x/2.1.x
+	PID_FILE="${OPENSHIFT_REPO_DIR}RUNNING_PID"
+else
+	# for 2.2.x or later
+	PID_FILE="${OPENSHIFT_REPO_DIR}target/universal/stage/RUNNING_PID"
+fi
+
+#kill play process if it was running
 
 function kill_app {
 	COMMAND="$1 $2"
@@ -25,7 +36,6 @@ function kill_app {
 	done
 }
 
-#kill play process if it was running
 if [[ -f "$PID_FILE" ]]
 then
 	PID=`cat $PID_FILE`
