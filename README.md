@@ -292,7 +292,7 @@ The server will listen to `$OPENSHIFT_INTERNAL_PORT` at `$OPENSHIFT_INTERNAL_IP`
 Contributing
 ------------
 
-If you have some ideas on how to improve this quickstart (miss some info, found a typo, have some issues following the instructions) - fell free to send a pull request or open an issue. Any help is welcome!
+If you have some ideas on how to improve this quickstart (miss some info, found a typo, have some issues following the instructions) - feel free to send a pull request or open an issue. Any help is welcome!
 
 
 Acknowledgments
