@@ -7,9 +7,15 @@ LOG_FILE="${OPENSHIFT_DIY_LOG_DIR}play.log"
 
 # figure out the start script (and ensure it is runnable)
 
-START_SCRIPT_BAT=`find ${OPENSHIFT_REPO_DIR}target/universal/stage/bin -name \*.bat`
-
-START_SCRIPT=${START_SCRIPT_BAT%.bat}
+if [[ -f "${OPENSHIFT_REPO_DIR}target/start" ]]
+then
+	# for 2.0.x/2.1.x
+	START_SCRIPT="${OPENSHIFT_REPO_DIR}target/start"
+else
+	# for 2.2.x or later
+	START_SCRIPT_BAT=`find ${OPENSHIFT_REPO_DIR}target/universal/stage/bin -name \*.bat`
+	START_SCRIPT=${START_SCRIPT_BAT%.bat}
+fi
 
 chmod +x $START_SCRIPT
 
